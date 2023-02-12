@@ -24,4 +24,10 @@ app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 
-app.listen(3000, () => console.log(`app is running on port 3000`));
+const PORT = process.env.PORT || 5000;
+
+mongoose.set("strictQuery", false);
+
+mongoose.connect(process.env.MONGO_URL).then(() => {
+  app.listen(PORT, () => console.log(`app is running on port ${PORT}`));
+});
